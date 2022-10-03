@@ -1,23 +1,53 @@
 package edu.ccsu.cs505.accounts;
 
-import edu.ccsu.cs505.payingparty.Customer;
+import java.text.NumberFormat;
 
-public class CreditAccount extends BankAccount
+
+public class CreditAccount extends Account
 {
 
-	public CreditAccount(Customer customer)
+	
+	private double creditLimit;
+	
+	public CreditAccount(double creditLimit)
 	{
-		super(customer);
-		// TODO Auto-generated constructor stub
+		
+		this.creditLimit = creditLimit;
+		balance = 0;
+		
+	
 	}
 
+	public void Charge(double newAmount)
+	{
+		balance += newAmount;
+		
+		if(balance > creditLimit)
+		{
+			System.out.println("Insufficient funds.");
+			balance -= newAmount; // 
+		}
+	}
+	 
 	@Override
 	public void deduct(double amount)
 	{
-		// TODO Auto-generated method stub
 		
 	}
-
 	
+	public String toString()
+	{
+		String result = ""; 
+		
+		NumberFormat fmt = NumberFormat.getCurrencyInstance();
+		
+		result += "Credit Card Balance: " + fmt.format(balance);
+		result +=  " Credit Limit: " + fmt.format(creditLimit);
+		fmt.format(creditLimit);
+		
+		
+		
+		return result;
+	}
 
 }

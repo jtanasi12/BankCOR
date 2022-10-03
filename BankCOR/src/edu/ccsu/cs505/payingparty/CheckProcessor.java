@@ -1,12 +1,16 @@
 package edu.ccsu.cs505.payingparty;
+import edu.ccsu.cs505.accounts.BankAccount;
 
-public class CheckProcessor 
+abstract public class CheckProcessor 
 {
 	public CheckProcessor()
 	{
 		
 	}
 	
-
+	static public void processBeck(BankAccount bank, double amount)
+	{
+		
+	}
 	
 }

@@ -3,27 +3,30 @@ import edu.ccsu.cs505.payingparty.Customer;
 
 public class BankAccount extends Account
 {
-	protected Customer customer;
-	protected int accountNumber;
-	protected double balance;
+
 	
-	public BankAccount(Customer customer)
+	public BankAccount(double balance)
 	{
-		this.customer = customer; // Pass along customer object, 1 account has 1 customer
-	}
-	public void addCheckingAccount()
-	{
+		this.balance  = balance;
+		
 		
 	}
 	
-	public void addSavingAccount()
-	{
-		
-	}
      public void deduct(double amount)
 	{
 		
 		
 	}
+     
+     public void makeDeposit(double amount)
+     {
+    	 balance += amount;
+     }
+     public double getBalanace()
+     {
+    	 return balance;
+     }
+
+   
 
 }
