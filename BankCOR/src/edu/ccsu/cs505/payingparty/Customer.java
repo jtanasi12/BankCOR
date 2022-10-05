@@ -19,9 +19,9 @@ public class Customer implements PayingParty
 	protected String name;
 	protected String socialSecurityNumber;
 	protected String birthDate;
-	Account account;
+	protected Account account;
 	
-	Account headAccount = null;
+	protected Account headAccount = null;
 	 
 	/**
 	 * Customer constructor a checking account is created for every new customer.

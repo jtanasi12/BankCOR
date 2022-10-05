@@ -13,7 +13,7 @@ public abstract class Account
 	
 	
 	protected Account nextAccount = null;  
-	protected Account nodeHead = null;
+ 
 	
 	
 	/**
