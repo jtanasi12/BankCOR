@@ -1,75 +1,103 @@
 package edu.ccsu.cs505.payingparty;
 import edu.ccsu.cs505.accounts.Account;
 import edu.ccsu.cs505.accounts.CheckingAccount;
-import edu.ccsu.cs505.accounts.CreditAccount;
-import edu.ccsu.cs505.accounts.SavingsAccount;
-
-import java.util.ArrayList;
+import edu.ccsu.cs505.accounts.BankAccount;
+ 
+/**
+ * 
+ * This class represents a customer who can open up banking and credit accounts.
+ * 
+ * A Customer is allowed to add accounts in a specific order that the COR pattern uses. 
+ * 
+ * 
+ * @author Joseph Tanasi 
+ *
+ */
 
 public class Customer implements PayingParty
 {
 	protected String name;
 	protected String socialSecurityNumber;
 	protected String birthDate;
-
+	Account account;
 	
-	protected ArrayList<Account> accounts = new ArrayList<>();
-
-	
+	Account headAccount = null;
+	 
+	/**
+	 * Customer constructor a checking account is created for every new customer.
+	 * 
+	 * @param name 
+	 * @param socialSecurityNumber
+	 * @param birthDate
+	 * @param initialBalance gets passed into a CheckingAccount
+	 */
 	public Customer(String name, String socialSecurityNumber, 
-			String birthDate, double initialBalance)
-	{
+			String birthDate, double initialBalance){
+		
 		this.name = name;
 		this.socialSecurityNumber = socialSecurityNumber;
 		this.birthDate = birthDate;
 		
-		accounts.add(new CheckingAccount(initialBalance )); // Default Checking Account
 		
+		account = new CheckingAccount(initialBalance);
+		
+		// A pointer that keeps track of the beginning of the chain of Account Objects.
+		headAccount = account;
+	}
 
-	}
-	
-	public void addAccount(Account newAccount)
-	{
-		accounts.add(newAccount);
-	}
-	public void addSavingsAccount(double balance)
-	{
-		accounts.add(new SavingsAccount( balance ));
-	}
-	
-	public void addCreditAccount(Customer custom, double creditLimit)
-	{
-		accounts.add(new CreditAccount( creditLimit));
-	}
-	
-	public void displayAccounts()
-	{
-		//System.out.println(accounts);
+	/**
+	 * 
+	 * Returns the first account object in the chain which is a checking account by default.
+	 * 
+	 */
+	public void head(){
 		
-		for(int i = 0; i < accounts.size(); i++)
+		System.out.println(headAccount);
+	}
+
+	/**
+	 * Allows the customer to open a new Account. 
+	 * 
+	 * @param newAccount gets attached to the previous accounts pointer.
+	 * This allows us to chain the accounts together.
+	 * 
+	 */
+	public void addAccount(Account newAccount){
+		
+		account.getNextAccount(newAccount);
+		account = newAccount;
+	}	
+	
+	/**
+	 * Iterate through the chain of account objects and displays them to the screen.
+	 */
+	public void displayAccounts(){
+		
+		Account temp = headAccount;
+		
+		while(temp != null)
 		{
-			System.out.print(accounts.get(i) + " ");
-			
-			System.out.println();
+		System.out.println(temp); 
+		temp = temp.getNext();
 		}
 		
-		
-	}
-	@Override
-	public void pay(double amount)
-	{
-		
-		// NEW COMMENT
-	}
-
-
-	public ArrayList<Account> getList()
-	{
-		return accounts;
 	}
 	
-	public String toString()
-	{
+	/**
+	 * Calls the CheckProcessor to initialize a payment.
+	 * The first account (which is a checking account) gets passed into CheckProcessors processCheck method.
+	 * 
+	 * @param amount
+	 */
+	@Override
+	public void pay( double amount){
+		
+		CheckProcessor.processCheck((BankAccount)headAccount, amount);
+
+	}
+		
+	@Override
+	public String toString(){
 		String result = "Name: " + name;
 		result += "\tSocial Security Number: " + socialSecurityNumber;
 		result += "\tBirthdate: " + birthDate;

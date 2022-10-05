@@ -1,28 +1,35 @@
 package edu.ccsu.cs505.accounts;
-
 import java.text.NumberFormat;
-import edu.ccsu.cs505.payingparty.Customer;
 
+/**
+ * 
+ * This class is a savings account that extends from BankAccount
+ * 
+ * @author josephtanasi10
+ *
+ */
 public class SavingsAccount extends BankAccount
 {
-
-	public SavingsAccount(double balance)
-	{
-		super( balance);
+	/**
+	 * Constructs a savings account.
+	 *  
+	 * @param balance
+	 */
+	public SavingsAccount(double balance){
 		
+		super( balance);
+		name = "Savings";
 	}
 
-	
-	public String toString()
-	{
+	@Override
+	public String toString(){
+		
 		String result; 
 		
 		NumberFormat fmt = NumberFormat.getCurrencyInstance();
 		
 		result = "Savings: " + fmt.format(balance);
-		
-
-		
+		 
 		return result;
 	}
 }
