@@ -24,6 +24,7 @@ import  edu.ccsu.cs505.insufficientfunds.*;
 		 catch(InsufficientFundsException e)
 		 {
 			 System.out.println(e.getMessage());
+			 return false;
 		 }
 		
 		return true;

@@ -12,7 +12,7 @@ import edu.ccsu.cs505.insufficientfunds.*;
 public class CreditAccount extends Account
 {
 	private double creditLimit;
-	private static double MAX;
+	private double max;
 	
 	/**
 	 * Constructor for a credit card account
@@ -23,7 +23,7 @@ public class CreditAccount extends Account
 	{
 		this.creditLimit = creditLimit;
 		balance = 0;
-		MAX = creditLimit;
+		max = creditLimit;
 		
 		name = "Credit Account";
  	}
@@ -36,7 +36,7 @@ public class CreditAccount extends Account
 	 * The BankAccount doesn't use the COR method when exception is thrown
 	 * @param newAmount
 	 */
-	public void Charge(double newAmount){
+	public void charge(double newAmount){
 		 
 		double originalBalance = balance;
 		
@@ -83,7 +83,7 @@ public class CreditAccount extends Account
 			if(nextAccount == null)
 				throw new InsufficientFundsException("Insufficient Funds!");
 				
-			balance = MAX;
+			balance = max;
 			nextAccount.deduct(remaining);
 
 			}
@@ -91,7 +91,7 @@ public class CreditAccount extends Account
 			catch(InsufficientFundsException e){	
 				
 		    balance = originalBalance;
- 		    	throw new InsufficientFundsException("Insufficient Funds!");
+ 		    	throw e;
 			}
 		}
 	}

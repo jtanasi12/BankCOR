@@ -57,7 +57,7 @@ public class BankAccount extends Account
     	catch(InsufficientFundsException e){
     				
     	balance = originalBalance;
-    	     throw new InsufficientFundsException("Insufficient Funds!");
+    	     throw e;
     		}
     	 }	
 	}
