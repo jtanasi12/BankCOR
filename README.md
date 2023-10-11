@@ -1,6 +1,3 @@
 # BankCOR
 
-A bank system that allows users to add multiple checking/savings accounts and credit accounts. 
-We have a CheckProcessors method we call when a customer has to make a deduction and pay off a check.
-The customer can decide the order of accounts the Checkprocesor will deduct from until the request has been made.
-If the total amount is unavaiable across all accounts we throw an exception and don't deduct any money. 
+Our banking system provides users with the flexibility to manage multiple checking/savings accounts and credit accounts. The CheckProcessors method, invoked when a customer needs to make a deduction and settle a check, allows users to specify the order of deduction from their accounts. If the cumulative amount is unavailable across all accounts, the system gracefully handles the situation by throwing an exception, ensuring no funds are deducted. This banking application leverages the console window to exemplify the implementation of design patterns in Java, while also highlighting the utilization of exception propagation.
